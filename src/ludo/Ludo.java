@@ -1411,7 +1411,7 @@ public class Ludo {
                                                 System.out.println("La \033[33mFicha 1\u001B[0m se ha comido a la \033[31mFicha 3\u001B[0m ");
                                             }
 
-                                            if (jugador3.ficha1.casilla == jugador3.ficha4.casilla && !jugador2.ficha4.home) {
+                                            if (jugador3.ficha1.casilla == jugador2.ficha4.casilla && !jugador2.ficha4.home) {
                                                 jugador2.ficha4.casilla = 0;
                                                 System.out.println("La \033[33mFicha 1\u001B[0m se ha comido a la \033[31mFicha 4\u001B[0m ");
                                             }
@@ -1723,6 +1723,560 @@ public class Ludo {
                     System.out.println("FIN---> se acabo todo");
                 }
                 //fin jugador 3
+                
+                
+                //jugador 4 uwu
+                if (jugador4.play) {
+
+                    System.out.println("Es el turno del \033[33m Jugador 4\u001B[0m");
+                    System.out.println("");
+                    System.out.println("Tienes " + jugador4.fichaenCasa + " Fichas en la meta");
+
+                    int J40 = 0;//declaracion de la variable para lanzar los dados u salir del juego
+                    do {
+                        System.out.println("1<----------Lanzar el dado");
+                        System.out.println("2<----------Abandonar partida");
+                        System.out.println("");
+                       J40 = entrada.nextInt();//se asigna un valor a la variable J1O
+
+                        switch (J40) {//inicio del switch/case para lanzar los dados o saltar turno
+                            case 1:
+                                dado.lanzar();
+                                System.out.println("El dado cae y muestra el numero " + dado.numero);
+                                break;
+                            case 2:
+                                jugador4.play = false;
+                                break;
+                            default:
+                                System.out.println("Opcion invalida");
+                        }//fin del switch/case para lanzar los dados o saltar turno
+
+                        if (jugador4.ficha1.casilla == 0 && jugador4.ficha2.casilla == 0 && jugador4.ficha3.casilla == 0 && jugador4.ficha4.casilla == 0) {//inicio de las condiciones que comprueva si las fichas del jugador 1 se encuentran en la casilla 0
+                            System.out.println("Todas tus Fichas están en la base.");
+                            System.out.println("");
+
+                            if (dado.numero == 6 || dado.numero == 1) {//inicio condicionales para la salidad de las fichas del jugador 1
+                                jugador4.ficha1.move = true;
+                                jugador4.ficha2.move = true;
+                                jugador4.ficha3.move = true;
+                                jugador4.ficha4.move = true;
+                            } else {
+                                jugador4.ficha1.move = false;
+                                jugador4.ficha2.move = false;
+                                jugador4.ficha3.move = false;
+                                jugador4.ficha4.move = false;
+                            }//fin de la condicionales para la salida de la fichas
+                            
+                        } else {// si el las fichas no estan en la posicion 0
+
+                            if (jugador4.ficha1.home) {
+                                if (jugador4.ficha1.casilla == 59 && jugador4.ficha1.home) {
+
+                                    System.out.println("La \033[33mFicha 1\u001B[0m ya llegó a la meta");
+                                    System.out.println("");
+                                    jugador4.ficha1.move = false;
+
+                                } else if (jugador4.ficha1.casilla < 59 && jugador4.ficha1.home) {
+                                    System.out.println("La \033[33mFicha 1\u001B[0m está en casa, a " + (59 - jugador4.ficha1.casilla) + " de la meta");
+                                    System.out.println("");
+                                    jugador4.ficha1.move = (59 - jugador4.ficha1.casilla) >= dado.numero;
+                                }
+                            } else {
+                                if (jugador4.ficha1.casilla == 0 && !jugador4.ficha1.home) {
+                                    System.out.println("La \033[33mFicha 1\u001B[0m esta en la base");
+                                    System.out.println("");
+                                    jugador4.ficha1.move = dado.numero == 6 || dado.numero == 1;
+                                } else if (jugador4.ficha1.casilla < 59 && jugador4.ficha1.casilla > 0 && !jugador4.ficha1.home) {
+                                    System.out.println("La \033[33mFicha 1\u001B[0m está en la casilla " + jugador4.ficha1.casilla);
+                                    jugador4.ficha1.move = true;
+                                }
+                            }
+                            
+                            //coniciones de la ficha 3 en home
+                            if (jugador4.ficha2.home) {
+                                if (jugador4.ficha2.casilla == 59 && jugador4.ficha2.home) {
+
+                                    System.out.println("La \033[33mFicha 2\u001B[0m ya llegó a la meta");
+                                    System.out.println("");
+                                    jugador4.ficha2.move = false;
+
+                                } else if (jugador4.ficha2.casilla < 59 && jugador4.ficha2.home) {
+                                    System.out.println("La \033[33mFicha 2\u001B[0m está en casa, a " + (59 - jugador4.ficha2.casilla) + " de la meta");
+                                    System.out.println("");
+                                    jugador4.ficha2.move = (59 - jugador4.ficha2.casilla) >= dado.numero;
+                                }
+                            } else {
+                                if (jugador4.ficha2.casilla == 0 && !jugador4.ficha2.home) {
+                                    System.out.println("La \033[33mFicha 2\u001B[0m esta en la base");
+                                    System.out.println("");
+                                    jugador4.ficha2.move = dado.numero == 6 || dado.numero == 1;
+                                } else if (jugador4.ficha2.casilla < 59 && jugador4.ficha2.casilla > 0 && !jugador4.ficha2.home) {
+                                    System.out.println("La \033[33mFicha 2\u001B[0m está en la casilla " + jugador4.ficha2.casilla);
+                                    jugador4.ficha2.move = true;
+                                }
+                            }//fin coniciones de la ficha 2
+                            
+                            //coniciones de la ficha 3 en home
+                            if (jugador4.ficha3.home) {
+                                if (jugador4.ficha3.casilla == 59 && jugador4.ficha3.home) {
+
+                                    System.out.println("La \033[33mFicha 3\u001B[0m ya llegó a la meta");
+                                    System.out.println("");
+                                    jugador4.ficha3.move = false;
+
+                                } else if (jugador4.ficha3.casilla < 59 && jugador4.ficha3.home) {
+                                    System.out.println("La \033[33mFicha 3\u001B[0m está en casa, a " + (59 - jugador4.ficha3.casilla) + " de la meta");
+                                    System.out.println("");
+                                    jugador4.ficha3.move = 59 - jugador4.ficha3.casilla >= dado.numero;
+                                }
+                            } else {
+                                if (jugador4.ficha3.casilla == 0 && !jugador4.ficha3.home) {
+                                    System.out.println("La \033[33mFicha 3\u001B[0m esta en la base");
+                                    System.out.println("");
+                                    jugador4.ficha3.move = dado.numero == 6 || dado.numero == 1;
+                                } else if (jugador4.ficha3.casilla < 59 && jugador4.ficha3.casilla > 0 && !jugador4.ficha3.home) {
+                                    System.out.println("La \033[33mFicha 3\u001B[0m está en la casilla " + jugador4.ficha3.casilla);
+                                    jugador4.ficha3.move = true;
+                                }
+                            }//fin coniciones de la ficha 3
+                            
+                            //condicion en caso de que la ficha 4 este en el home
+                            if (jugador4.ficha4.home) {
+                                if (jugador4.ficha4.casilla == 59 && jugador4.ficha4.home) {
+
+                                    System.out.println("La \033[33mFicha 4\u001B[0m ya llegó a la meta");
+                                    System.out.println("");
+                                    jugador4.ficha4.move = false;
+
+                                } else if (jugador4.ficha4.casilla < 59 && jugador4.ficha4.home) {
+                                    System.out.println("La \033[33mFicha 4\u001B[0m está en casa, a " + (59 - jugador4.ficha4.casilla) + " de la meta");
+                                    System.out.println("");
+                                    jugador4.ficha4.move = (59 - jugador4.ficha4.casilla) >= dado.numero;
+                                }
+                            } else {
+                                if (jugador4.ficha4.casilla == 0 && !jugador4.ficha4.home) {
+                                    System.out.println("La \033[33mFicha 4\u001B[0m esta en la base");
+                                    System.out.println("");
+                                    jugador4.ficha4.move = dado.numero == 6 || dado.numero == 1;
+                                } else if (jugador4.ficha4.casilla < 59 && jugador4.ficha4.casilla > 0 && !jugador4.ficha4.home) {
+                                    System.out.println("La \033[33mFicha 4\u001B[0m está en la casilla " + jugador4.ficha4.casilla);
+                                    jugador4.ficha4.move = true;
+                                }
+                            }
+                        }//fin coniciones de la ficha 4
+
+                        if (!jugador4.ficha1.move && !jugador4.ficha2.move && !jugador4.ficha3.move && !jugador4.ficha4.move) {
+                            System.out.println("No puedes mover ninguna ficha, lo siento");
+                            System.out.println("");
+                        } else {
+                            System.out.println("¿Qué ficha deseas mover?");
+                            System.out.println("");
+
+                            Boolean move = false;
+                            while (!move) {
+                                if (jugador4.ficha1.move) {
+                                    System.out.println("1<----------Mover \033[33mFicha 1\u001B[0m");
+                                } else {
+                                    System.out.println("No se puede mover la \033[33mFicha 1\u001B[0m");
+                                }
+
+                                if (jugador4.ficha2.move) {
+                                    System.out.println("2<----------Mover \033[33mFicha 2\u001B[0m");
+                                } else {
+                                    System.out.println("No se puede mover la \033[33mFicha 2\u001B[0m");
+                                }
+
+                                if (jugador4.ficha3.move) {
+                                    System.out.println("3<----------Mover \033[33mFicha 3\u001B[0m");
+                                } else {
+                                    System.out.println("No se puede mover la \033[33mFicha 3\u001B[0m");
+                                }
+
+                                if (jugador4.ficha4.move) {
+                                    System.out.println("4<----------Mover \033[33mFicha 4\u001B[0m");
+                                } else {
+                                    System.out.println("No se puede mover la \033[33mFicha 4\u001B[0m");
+                                }
+
+                                int FM4 = entrada.nextInt();
+
+                                switch (FM4) {
+
+                                    case 1:
+                                        if (jugador4.ficha1.move) {
+                                            System.out.println("Se mueve la \033[33mFicha 1\u001B[0m...");
+                                            if (jugador4.ficha1.home) {
+                                                jugador4.ficha1.casilla += dado.numero;
+                                                move = true;
+                                                if (jugador4.ficha1.casilla == 59) {
+                                                    System.out.println("La \033[33mFicha 1\u001B[0m ha llegado a la meta");
+                                                    jugador4.fichaenCasa++;
+                                                } else {
+
+                                                    System.out.println("La \033[33mFicha 1\u001B[0m está en la casa, a" + (59 - jugador4.ficha1.casilla) + " de la meta");
+
+                                                }
+
+                                            } else if (jugador4.ficha1.casilla == 0) {
+                                                jugador4.ficha1.casilla = 56;
+                                                System.out.println("La \033[33mFicha 1\u001B[0m salió a la casilla " + jugador4.ficha1.casilla);
+                                                move = true;
+                                            } else {
+                                                jugador4.ficha1.casilla += dado.numero;
+                                                System.out.println("Ahora, \033[33mFicha 1\u001B[0m está en la casilla " + jugador4.ficha1.casilla);
+                                                move = true;
+
+                                            }
+
+                                            if (jugador4.ficha1.casilla == jugador1.ficha1.casilla && !jugador1.ficha1.home) {
+                                                jugador1.ficha1.casilla = 0;
+                                                System.out.println("\033[33mFicha 1\u001B[0m se ha comido a la \033[34mFicha 1\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha1.casilla == jugador1.ficha2.casilla && !jugador1.ficha2.home) {
+                                                jugador1.ficha2.casilla = 0;
+                                                System.out.println("La \033[33mFicha 1\u001B[0m se ha comido a la \033[34mFicha 2\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha1.casilla == jugador1.ficha3.casilla && !jugador1.ficha3.home) {
+                                                jugador1.ficha3.casilla = 0;
+                                                System.out.println("La \033[33mFicha 1\u001B[0m se ha comido a la \033[34mFicha 3\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha1.casilla == jugador1.ficha4.casilla && !jugador1.ficha4.home) {
+                                                jugador1.ficha4.casilla = 0;
+                                                System.out.println("La \033[33mFicha 1\u001B[0m se ha comido a la \033[34mFicha 4\u001B[0m ");
+                                            }
+                                            
+                                            
+
+                                            if (jugador4.ficha1.casilla == jugador2.ficha1.casilla && !jugador2.ficha1.home) {
+                                                jugador2.ficha1.casilla = 0;
+                                                System.out.println("\033[33mFicha 1\u001B[0m se ha comido a la \031[34mFicha 1\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha1.casilla == jugador2.ficha2.casilla && !jugador2.ficha2.home) {
+                                                jugador2.ficha2.casilla = 0;
+                                                System.out.println("La \033[33mFicha 1\u001B[0m se ha comido a la \033[31mFicha 2\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha1.casilla == jugador2.ficha3.casilla && !jugador2.ficha3.home) {
+                                                jugador2.ficha3.casilla = 0;
+                                                System.out.println("La \033[33mFicha 1\u001B[0m se ha comido a la \033[31mFicha 3\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha1.casilla == jugador2.ficha4.casilla && !jugador2.ficha4.home) {
+                                                jugador2.ficha4.casilla = 0;
+                                                System.out.println("La \033[33mFicha 1\u001B[0m se ha comido a la \033[31mFicha 4\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha1.casilla == jugador3.ficha1.casilla && !jugador3.ficha1.home) {
+                                                jugador3.ficha1.casilla = 0;
+                                                System.out.println("\033[33mFicha 1\u001B[0m se ha comido a la \032[34mFicha 1\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha1.casilla == jugador3.ficha2.casilla && !jugador3.ficha2.home) {
+                                                jugador3.ficha2.casilla = 0;
+                                                System.out.println("La \033[33mFicha 1\u001B[0m se ha comido a la \033[32mFicha 2\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha1.casilla == jugador3.ficha3.casilla && !jugador3.ficha3.home) {
+                                                jugador3.ficha3.casilla = 0;
+                                                System.out.println("La \033[33mFicha 1\u001B[0m se ha comido a la \032[31mFicha 3\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha1.casilla == jugador3.ficha4.casilla && !jugador3.ficha4.home) {
+                                                jugador3.ficha4.casilla = 0;
+                                                System.out.println("La \033[33mFicha 1\u001B[0m se ha comido a la \032[31mFicha 4\u001B[0m ");
+                                            }
+
+                                        } else {
+                                            System.out.println("No se puede mover la \033[33mFicha 1\u001B[0m");
+                                            System.out.println("Seleccione otra \033[33mFicha\u001B[0m");
+                                        }
+                                        break;
+                                    case 2:
+                                        if (jugador4.ficha2.move) {
+                                            System.out.println("Se mueve la \033[33mFicha 2\u001B[0m...");
+                                            if (jugador4.ficha2.home) {
+                                                jugador4.ficha2.casilla += dado.numero;
+                                                move = true;
+                                                if (jugador4.ficha2.casilla == 59) {
+                                                    System.out.println("La \033[33mFicha 2\u001B[0m ha llegado a la meta");
+                                                    jugador4.fichaenCasa++;
+                                                } else {
+
+                                                    System.out.println("La \033[33mFicha 2\u001B[0m está en la casa, a" + (59 - jugador4.ficha2.casilla) + " de la meta");
+                                                }
+
+                                            } else if (jugador4.ficha2.casilla == 0) {
+                                                jugador4.ficha2.casilla = 56;
+                                                System.out.println("La \033[33mFicha 2\u001B[0m salió a la casilla " + jugador4.ficha2.casilla);
+                                                move = true;
+                                            } else {
+                                                jugador4.ficha2.casilla += dado.numero;
+                                                System.out.println("Ahora, \033[33mFicha 2\u001B[0m está en la casilla " + jugador4.ficha2.casilla);
+                                                move = true;
+                                            }
+
+                                            if (jugador4.ficha2.casilla == jugador1.ficha1.casilla && !jugador1.ficha1.home) {
+                                                jugador1.ficha1.casilla = 0;
+                                                System.out.println("\033[33mFicha 2\u001B[0m se ha comido a la \033[34mFicha 1\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha2.casilla == jugador1.ficha2.casilla && !jugador1.ficha2.home) {
+                                                jugador1.ficha2.casilla = 0;
+                                                System.out.println("La \033[33mFicha 2\u001B[0m se ha comido a la \033[34mFicha 2\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha2.casilla == jugador1.ficha3.casilla && !jugador1.ficha3.home) {
+                                                jugador1.ficha3.casilla = 0;
+                                                System.out.println("La \033[33mFicha 2\u001B[0m se ha comido a la \033[34mFicha 3\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha2.casilla == jugador1.ficha4.casilla && !jugador1.ficha4.home) {
+                                                jugador1.ficha4.casilla = 0;
+                                                System.out.println("La \033[33mFicha 2\u001B[0m se ha comido a la \033[34mFicha 4\u001B[0m ");
+                                            }
+                                            
+
+                                            if (jugador4.ficha2.casilla == jugador2.ficha1.casilla && !jugador2.ficha1.home) {
+                                                jugador2.ficha1.casilla = 0;
+                                                System.out.println("\033[33mFicha 2\u001B[0m se ha comido a la \031[34mFicha 1\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha2.casilla == jugador2.ficha2.casilla && !jugador2.ficha2.home) {
+                                                jugador2.ficha2.casilla = 0;
+                                                System.out.println("La \033[33mFicha 2\u001B[0m se ha comido a la \033[31mFicha 2\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha2.casilla == jugador2.ficha3.casilla && !jugador2.ficha3.home) {
+                                                jugador2.ficha3.casilla = 0;
+                                                System.out.println("La \033[33mFicha 2\u001B[0m se ha comido a la \033[31mFicha 3\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha2.casilla == jugador2.ficha4.casilla && !jugador2.ficha4.home) {
+                                                jugador2.ficha4.casilla = 0;
+                                                System.out.println("La \033[33mFicha 2\u001B[0m se ha comido a la \033[31mFicha 4\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha2.casilla == jugador3.ficha1.casilla && !jugador3.ficha1.home) {
+                                                jugador3.ficha1.casilla = 0;
+                                                System.out.println("\033[33mFicha 2\u001B[0m se ha comido a la \032[34mFicha 1\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha2.casilla == jugador3.ficha2.casilla && !jugador3.ficha2.home) {
+                                                jugador3.ficha2.casilla = 0;
+                                                System.out.println("La \033[33mFicha 2\u001B[0m se ha comido a la \033[32mFicha 2\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha2.casilla == jugador3.ficha3.casilla && !jugador3.ficha3.home) {
+                                                jugador3.ficha3.casilla = 0;
+                                                System.out.println("La \033[33mFicha 2\u001B[0m se ha comido a la \032[31mFicha 3\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha2.casilla == jugador3.ficha4.casilla && !jugador3.ficha4.home) {
+                                                jugador3.ficha4.casilla = 0;
+                                                System.out.println("La \033[33mFicha 2\u001B[0m se ha comido a la \032[31mFicha 4\u001B[0m ");
+                                            }
+
+                                        } else {
+                                            System.out.println("No se puede mover la \033[33mFicha 2\u001B[0m");
+                                            System.out.println("Seleccione otra \033[33mFicha\u001B[0m");
+                                        }
+                                        break;
+
+                                    case 3:
+                                        if (jugador4.ficha3.move) {
+                                            System.out.println("Se mueve la \033[33mFicha 3\u001B[0m...");
+                                            if (jugador4.ficha3.home) {
+                                                jugador4.ficha3.casilla += dado.numero;
+                                                move = true;
+                                                if (jugador4.ficha3.casilla == 59) {
+                                                    System.out.println("La \033[33mFicha 3\u001B[0m ha llegado a la meta");
+                                                    jugador4.fichaenCasa++;
+                                                } else {
+
+                                                    System.out.println("La \033[33mFicha 3\u001B[0m está en la casa, a" + (59 - jugador4.ficha3.casilla) + " de la meta");
+
+                                                }
+
+                                            } else if (jugador4.ficha3.casilla == 0) {
+                                                jugador4.ficha3.casilla = 56;
+                                                System.out.println("La \033[33mFicha 3\u001B[0m salió a la casilla " + jugador4.ficha3.casilla);
+                                                move = true;
+                                            } else {
+                                                jugador4.ficha3.casilla += dado.numero;
+                                                System.out.println("Ahora, \033[33mFicha 3\u001B[0m está en la casilla " + jugador4.ficha3.casilla);
+                                                move = true;
+                                            }
+
+                                            if (jugador4.ficha3.casilla == jugador1.ficha1.casilla && !jugador1.ficha1.home) {
+                                                jugador1.ficha1.casilla = 0;
+                                                System.out.println("\033[33mFicha 3\u001B[0m se ha comido a la \033[34mFicha 1\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha3.casilla == jugador1.ficha2.casilla && !jugador1.ficha2.home) {
+                                                jugador1.ficha2.casilla = 0;
+                                                System.out.println("La \033[33mFicha 3\u001B[0m se ha comido a la \033[34mFicha 2\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha3.casilla == jugador1.ficha3.casilla && !jugador1.ficha3.home) {
+                                                jugador1.ficha3.casilla = 0;
+                                                System.out.println("La \033[33mFicha 3\u001B[0m se ha comido a la \033[34mFicha 3\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha3.casilla == jugador1.ficha4.casilla && !jugador1.ficha4.home) {
+                                                jugador1.ficha4.casilla = 0;
+                                                System.out.println("La \033[33mFicha 3\u001B[0m se ha comido a la \033[34mFicha 4\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha3.casilla == jugador2.ficha1.casilla && !jugador2.ficha1.home) {
+                                                jugador2.ficha1.casilla = 0;
+                                                System.out.println("\033[33mFicha 3\u001B[0m se ha comido a la \031[34mFicha 1\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha3.casilla == jugador2.ficha2.casilla && !jugador2.ficha2.home) {
+                                                jugador2.ficha2.casilla = 0;
+                                                System.out.println("La \033[33mFicha 3\u001B[0m se ha comido a la \033[31mFicha 2\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha3.casilla == jugador2.ficha3.casilla && !jugador2.ficha3.home) {
+                                                jugador2.ficha3.casilla = 0;
+                                                System.out.println("La \033[33mFicha 3\u001B[0m se ha comido a la \033[31mFicha 3\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha3.casilla == jugador2.ficha4.casilla && !jugador2.ficha4.home) {
+                                                jugador2.ficha4.casilla = 0;
+                                                System.out.println("La \033[33mFicha 3\u001B[0m se ha comido a la \033[31mFicha 4\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha3.casilla == jugador3.ficha1.casilla && !jugador3.ficha1.home) {
+                                                jugador3.ficha1.casilla = 0;
+                                                System.out.println("\033[33mFicha 3\u001B[0m se ha comido a la \032[34mFicha 1\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha3.casilla == jugador3.ficha2.casilla && !jugador3.ficha2.home) {
+                                                jugador3.ficha2.casilla = 0;
+                                                System.out.println("La \033[33mFicha 3\u001B[0m se ha comido a la \033[32mFicha 2\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha3.casilla == jugador3.ficha3.casilla && !jugador3.ficha3.home) {
+                                                jugador3.ficha3.casilla = 0;
+                                                System.out.println("La \033[33mFicha 3\u001B[0m se ha comido a la \032[31mFicha 3\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha3.casilla == jugador3.ficha4.casilla && !jugador3.ficha4.home) {
+                                                jugador3.ficha4.casilla = 0;
+                                                System.out.println("La \033[33mFicha 3\u001B[0m se ha comido a la \032[31mFicha 4\u001B[0m ");
+                                            }
+
+                                        } else {
+                                            System.out.println("No se puede mover la \033[33mFicha 3\u001B[0m");
+                                            System.out.println("Seleccione otra \033[33mFicha\u001B[0m");
+                                        }
+                                        break;
+                                    case 4:
+                                        if (jugador4.ficha4.move) {
+                                            System.out.println("Se mueve la \033[33mFicha 4\u001B[0m...");
+                                            if (jugador4.ficha4.home) {
+                                                jugador4.ficha4.casilla += dado.numero;
+                                                move = true;
+                                                if (jugador4.ficha4.casilla == 59) {
+                                                    System.out.println("La \033[33mFicha 4\u001B[0m ha llegado a la meta");
+                                                    jugador4.fichaenCasa++;
+                                                } else {
+
+                                                    System.out.println("La \033[33mFicha 4\u001B[0m está en la casa, a" + (59 - jugador4.ficha4.casilla) + " de la meta");
+                                                }
+
+                                            } else if (jugador4.ficha4.casilla == 0) {
+                                                jugador4.ficha4.casilla = 56;
+                                                System.out.println("La \033[33mFicha 4\u001B[0m salió a la casilla " + jugador4.ficha4.casilla);
+                                                move = true;
+                                            } else {
+                                                jugador4.ficha4.casilla += dado.numero;
+                                                System.out.println("Ahora, \033[33mFicha 4\u001B[0m está en la casilla " + jugador4.ficha4.casilla);
+                                                move = true;
+                                            }
+
+                                            if (jugador4.ficha4.casilla == jugador1.ficha1.casilla && !jugador1.ficha1.home) {
+                                                jugador1.ficha1.casilla = 0;
+                                                System.out.println("\033[33mFicha 4\u001B[0m se ha comido a la \033[34mFicha 1\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha4.casilla == jugador1.ficha2.casilla && !jugador1.ficha2.home) {
+                                                jugador1.ficha2.casilla = 0;
+                                                System.out.println("La \033[33mFicha 4\u001B[0m se ha comido a la \033[34mFicha 2\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha4.casilla == jugador1.ficha3.casilla && !jugador1.ficha3.home) {
+                                                jugador1.ficha3.casilla = 0;
+                                                System.out.println("La \033[33mFicha 4\u001B[0m se ha comido a la \033[34mFicha 3\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha4.casilla == jugador1.ficha4.casilla && !jugador1.ficha4.home) {
+                                                jugador1.ficha4.casilla = 0;
+                                                System.out.println("La \033[33mFicha 4\u001B[0m se ha comido a la \033[34mFicha 4\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha4.casilla == jugador2.ficha1.casilla && !jugador2.ficha1.home) {
+                                                jugador2.ficha1.casilla = 0;
+                                                System.out.println("\033[33mFicha 4\u001B[0m se ha comido a la \031[34mFicha 1\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha4.casilla == jugador2.ficha2.casilla && !jugador2.ficha2.home) {
+                                                jugador2.ficha2.casilla = 0;
+                                                System.out.println("La \033[33mFicha 4\u001B[0m se ha comido a la \033[31mFicha 2\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha4.casilla == jugador2.ficha3.casilla && !jugador2.ficha3.home) {
+                                                jugador2.ficha3.casilla = 0;
+                                                System.out.println("La \033[33mFicha 4\u001B[0m se ha comido a la \033[31mFicha 3\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha4.casilla == jugador2.ficha4.casilla && !jugador2.ficha4.home) {
+                                                jugador2.ficha4.casilla = 0;
+                                                System.out.println("La \033[33mFicha 4\u001B[0m se ha comido a la \033[31mFicha 4\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha4.casilla == jugador3.ficha1.casilla && !jugador3.ficha1.home) {
+                                                jugador3.ficha1.casilla = 0;
+                                                System.out.println("\033[33mFicha 4\u001B[0m se ha comido a la \032[34mFicha 1\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha4.casilla == jugador3.ficha2.casilla && !jugador3.ficha2.home) {
+                                                jugador3.ficha2.casilla = 0;
+                                                System.out.println("La \033[33mFicha 4\u001B[0m se ha comido a la \033[32mFicha 2\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha4.casilla == jugador3.ficha3.casilla && !jugador3.ficha3.home) {
+                                                jugador3.ficha3.casilla = 0;
+                                                System.out.println("La \033[33mFicha 4\u001B[0m se ha comido a la \032[31mFicha 3\u001B[0m ");
+                                            }
+
+                                            if (jugador4.ficha4.casilla == jugador3.ficha4.casilla && !jugador3.ficha4.home) {
+                                                jugador3.ficha4.casilla = 0;
+                                                System.out.println("La \033[33mFicha 4\u001B[0m se ha comido a la \032[31mFicha 4\u001B[0m ");
+                                            }
+
+                                        } else {
+                                            System.out.println("No se puede mover la \033[33mFicha 4\u001B[0m");
+                                            System.out.println("Seleccione otra \033[33mFicha\u001B[0m");
+                                        }
+                                        break;
+
+                                    default:
+                                        System.out.println("Es casilla no existe");
+
+                                }
+                            }
+
+                        }
+                    } while (dado.numero == 6 || dado.numero == 1 && J40 != 2);
+                    System.out.println("FIN---> se acabo todo");
+                }
+                //fin jugador 4 uwu
             }
         }
     }
